@@ -133,18 +133,19 @@ class NestThermostat:
 			# Loop through structures to find the named structure and build a lookup table
 			structures=self._status_data[NEST_STRUCTURE_DATA]
 			self._nest_structures=dict()
+			# It appears that "name" is no longer in the structure dict,
+			# Switch to using serial ~edrabbit 20140122
+			#for key in structures.keys():
+				#self._nest_structures[structures[key][NEST_STRUCTURE_NAME].lower()]=key
 			for key in structures.keys():
-				self._nest_structures[structures[key][NEST_STRUCTURE_NAME].lower()]=key
+				self._nest_structures[key]=key
+
 			# Look through serial numbers to find Nest names and build a lookup table
 			serials=self._status_data[NEST_SHARED_DATA]
 			self._nest_serials=dict()
-			# It appears that "name" is no longer in the structure dict,
-			# Switch to using serial ~edrabbit 20140122
-			#for key in serials.keys():
-			#	self._nest_serials[serials[key][NEST_DEVICE_NAME].lower()]=key
-			for key in structures.keys():
-				self._nest_structures[key]=key
-	
+			for key in serials.keys():
+				self._nest_serials[serials[key][NEST_DEVICE_NAME].lower()]=key
+
 			# Use this to set the serial and structure (location) instance variables and construct the URLs.  
 			# I'd rather do this earlier, but letting the user refer to the Nest (and its location) by name
 			# is worth it.

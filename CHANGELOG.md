@@ -1,6 +1,9 @@
 ChangeLog
 =========
 
+### 1.0.3
+* Default to only the first structure since Nest appears to have changed the
+information it returns on structure, breaking this plugin for some. ~edrabbit
 
 ### 1.0.2
 * Fixed issue with multiple nests merging into a single device instance.
